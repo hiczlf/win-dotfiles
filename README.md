@@ -8,6 +8,9 @@
 * fnm: 管理node版本
 * zoxide: 在不同的目录跳转
 * Vim: 文本编辑器
+* rg: 替代grep，搜索文件内容
+* fd: 替代find，搜索文件
+* eza: 替换ls
 
 
 
