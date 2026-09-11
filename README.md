@@ -33,12 +33,28 @@ chezmoi apply
 ## 管理的配置
 
 * `.chezmoi.toml.tmpl`：chezmoi 自身的配置模板，执行 `chezmoi init` 时生成 `$HOME\.config\chezmoi\chezmoi.toml`，让 `chezmoi cd` 使用 PowerShell 7（`pwsh`）。
-* `Documents/PowerShell/Microsoft.PowerShell_profile.ps1`：映射到 `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`，包含代理环境变量、fnm 初始化及 zoxide 初始化。
+* `Documents/PowerShell/Microsoft.PowerShell_profile.ps1`：映射到 `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`，包含代理环境变量、fnm 初始化、个人脚本目录 PATH 及 zoxide 初始化。
+* `dot_local/bin/`：映射到 `$HOME\.local\bin\`，存放个人 PowerShell 脚本。`.keep` 用于保留空目录，chezmoi 不会将它部署为目标文件。
 * `_vimrc`：映射到 `$HOME\_vimrc`，原样导入本机 Vim 安装目录中的配置，包含 Vim 示例配置及 Windows diff 支持。使用前需安装 Vim。
 * 代理使用本机 `7890` 端口，使用前请确认本机代理服务的端口一致。
 * zoxide 通过 profile 末尾的 `zoxide init powershell` 初始化；使用前需安装 zoxide，并确保 `zoxide` 命令可用。应用配置后重新打开 PowerShell 即可加载。
 
 如果系统重定向了 Documents 文件夹，先运行 `$PROFILE` 检查实际路径；当前目录布局适用于默认的 `$HOME\Documents` 路径。
+
+## 个人脚本
+
+先执行 `chezmoi cd`，将独立任务脚本（例如 `update-tools.ps1`）放入仓库的 `dot_local/bin/`，然后执行 `chezmoi diff` 和 `chezmoi apply`。
+
+profile 会将 `$HOME\.local\bin` 加入当前 PowerShell 的 PATH，并避免重复添加。首次应用后重新打开 PowerShell，即可在任意目录使用文件名调用脚本，例如 `update-tools.ps1`。
+
+如果脚本先写在本机目录中，可同步回仓库：
+
+```powershell
+chezmoi add "$HOME\.local\bin\update-tools.ps1"
+git diff
+```
+
+需要改变当前终端状态的操作（例如切换目录）适合写成 profile 中的函数。脚本名称应避免与现有命令重名。
 
 ## 更新配置
 

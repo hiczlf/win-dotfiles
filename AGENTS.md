@@ -8,6 +8,7 @@
 | --- | --- |
 | `Documents/PowerShell/Microsoft.PowerShell_profile.ps1` | `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`，配置代理、fnm 和 zoxide |
 | `_vimrc` | `$HOME\_vimrc`，Vim 配置及 Windows diff 支持 |
+| `dot_local/bin/` | `$HOME\.local\bin\`，个人脚本；profile 将该目录加入 PATH，`.keep` 保留空目录 |
 | `.chezmoi.toml.tmpl` | chezmoi 自身的配置模板，通过 `chezmoi init` 生成本地配置；当前指定 `chezmoi cd` 启动 `pwsh` |
 | `.chezmoiignore` | 排除不应部署到用户目录的仓库文件 |
 | `README.md` | 工具清单、安装、日常使用和更新配置说明 |
