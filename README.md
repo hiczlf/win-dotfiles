@@ -56,6 +56,21 @@ git diff
 
 需要改变当前终端状态的操作（例如切换目录）适合写成 profile 中的函数。脚本名称应避免与现有命令重名。
 
+### 批量创建 XLDD 卡密
+
+`XlddBatchCard.ps1` 使用 PowerShell 7 内置的 `Invoke-RestMethod`，无需 curl 或 jq。脚本输出第一项名称和卡密文本。
+
+应用脚本后，直接传入分类 ID 和数量：
+
+```powershell
+XlddBatchCard.ps1 -CardCategoryId 53 -Count 5
+# 也支持位置参数：XlddBatchCard.ps1 53 5
+```
+
+令牌直接配置在脚本的 `$XLDD_ADMIN_TOKEN` 变量中，更新令牌时修改该变量并重新应用脚本。分类 ID 沿用原脚本：`freepin_1m=39`、`freepik_3m=40`、`freepik_1w=45`、`freepik_1m_100=46`、`vecteezy_1m=53`、`motionarray_1m=54`。请求固定使用 `shopId=1` 和 `distribution=taobao`。
+
+分类 ID 和数量必须为正整数。请求失败或响应格式异常时脚本报错，不自动重试；请先检查后台是否已创建卡密。
+
 ## 更新配置
 
 以下操作均先通过 `chezmoi cd` 进入仓库目录。
