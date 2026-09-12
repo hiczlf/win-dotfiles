@@ -1,4 +1,3 @@
-#Requires -Version 7.0
 <#
 .SYNOPSIS
 批量创建 XLDD 卡密并输出名称和卡密文本。
@@ -7,10 +6,12 @@
 分类 ID：freepin_1m=39、freepik_3m=40、freepik_1w=45、
 freepik_1m_100=46、vecteezy_1m=53、motionarray_1m=54。
 .EXAMPLE
-XlddBatchCard.ps1 -CardCategoryId 53 -Count 5
+xldd-batch-card.ps1 -CardCategoryId 53 -Count 5
 .EXAMPLE
-XlddBatchCard.ps1 53 5
+xldd-batch-card.ps1 53 5
 #>
+
+#Requires -Version 7.0
 [CmdletBinding()]
 param(
     [Parameter(Mandatory, Position = 0)]
